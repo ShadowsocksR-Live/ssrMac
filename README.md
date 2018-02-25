@@ -16,14 +16,14 @@ Build from source code
 -----
 **Dependencies**:
  * **Sodium** [Installation](https://download.libsodium.org/doc/installation/index.html)
- * **OpenSSL** [Installation](https://github.com/openssl/openssl/blob/master/INSTALL)
+ * **mbedTLS** [Installation](https://github.com/ARMmbed/mbedtls#cmake)
  * **libuv** [Installation](https://github.com/libuv/libuv#build-instructions)
 
 Then pull **source code** and submodules
 ```bash
 git clone https://github.com/ShadowsocksR-Live/ssrMac.git
 cd ssrMac
-git submodule update --init
+git submodule update --init --recursive
 git submodule foreach -q 'git checkout $(git config -f $toplevel/.gitmodules submodule.$name.branch || echo master)'
 ```
 

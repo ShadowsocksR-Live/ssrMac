@@ -1,0 +1,7 @@
+build
+.idea/
+ssrMac.xcodeproj/project.xcworkspace/
+ssrMac.xcodeproj/xcuserdata/
+.DS_STORE
+*.dmg
+zxing-objc/ZXingObjC.xcodeproj/xcuserdata/

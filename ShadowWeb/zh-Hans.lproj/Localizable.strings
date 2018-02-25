@@ -1,0 +1,59 @@
+/* 
+  Localizable.strings
+  ShadowWeb
+
+  Created by clowwindy on 6/17/13.
+  Copyright (c) 2013 clowwindy. All rights reserved.
+*/
+
+"Saved" = "已保存";
+"Proxy Settings" = "代理设置";
+"Encryption Method" = "加密方式";
+"Enable/Disable APN" = "启动/停止 APN";
+"IP" = "IP";
+"Port" = "端口";
+"Password" = "密码";
+"Enable Unicom" = "打开联通";
+"Disable Unicom" = "禁用联通";
+"incorrect URL" = "错误的 URL";
+"OK" = "确定";
+"Cancel" = "取消";
+"Yes" = "是";
+"No" = "否";
+"New Tab" = "新标签页";
+"Close" = "关闭";
+"Back" = "后退";
+"Forward" = "前进";
+"Reload" = "刷新";
+"Settings" = "选项";
+"Loading" = "载入中";
+"Untitled" = "无标题";
+"Method" = "加密方法";
+"Proxy Mode" = "代理模式";
+"Help" = "帮助";
+"About" = "关于";
+"Version" = "版本";
+"Visit Website" = "访问主页";
+"Rate This App" = "给我打分";
+"Server" = "服务器";
+"Public" = "热心网友提供";
+"Custom" = "自定义";
+"Config via QRCode" = "用二维码配置";
+"Use this server?" = "使用这个服务器？";
+"Invalid ShadowsocksR URL" = "无效的 ShadowsocksR URL";
+"ShadowsocksR: On" = "ShadowsocksR: 打开";
+"ShadowsocksR: Off" = "ShadowsocksR: 关闭";
+"Turn ShadowsocksR On" = "打开 ShadowsocksR";
+"Turn ShadowsocksR Off" = "关闭 ShadowsocksR";
+"Auto Proxy Mode" = "自动代理模式";
+"Global Mode" = "全局模式";
+"Servers" = "服务器";
+"Open Server Preferences..." = "打开服务器设定...";
+"Please fill in the blanks." = "请填写以下内容。";
+"Show Logs..." = "显示日志...";
+"Edit PAC for Auto Proxy Mode..." = "编辑自动模式的 PAC...";
+"Edit User Rule for GFWList..." = "编辑 GFWList 的用户规则...";
+"Quit" = "退出";
+"https://github.com/shadowsocks/shadowsocks-iOS/wiki/Shadowsocks-for-OSX-Help" = "https://github.com/shadowsocks/shadowsocks-iOS/wiki/Shadowsocks-for-OSX-%E5%B8%AE%E5%8A%A9";
+"Show QR Code..." = "显示二维码...";
+"Update PAC from GFWList" = "从 GFWList 更新 PAC";

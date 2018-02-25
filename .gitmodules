@@ -1,0 +1,16 @@
+[submodule "GCDWebServer"]
+	path = GCDWebServer
+	url = https://github.com/swisspol/GCDWebServer.git
+	branch = master
+[submodule "GZIP"]
+	path = GZIP
+	url = https://github.com/nicklockwood/GZIP.git
+	branch = master
+[submodule "AFNetworking"]
+	path = AFNetworking
+	url = https://github.com/AFNetworking/AFNetworking.git
+	branch = master
+[submodule "shadowsocksr-native"]
+	path = shadowsocksr-native
+	url = https://github.com/ShadowsocksR-Live/shadowsocksr-native.git
+	branch = master

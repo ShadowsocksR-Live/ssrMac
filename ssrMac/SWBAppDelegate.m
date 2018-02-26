@@ -49,22 +49,23 @@
 static SWBAppDelegate *appDelegate;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    [self installHelper];
+
     _listenPort = DEFAULT_BIND_PORT;
     
-    [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(handleURLEvent:withReplyEvent:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
+    NSAppleEventManager *m = [NSAppleEventManager sharedAppleEventManager];
+    [m setEventHandler:self andSelector:@selector(handleURLEvent:withReplyEvent:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
 
-    // Insert code here to initialize your application
-    dispatch_queue_t proxy = dispatch_queue_create("proxy", NULL);
-    dispatch_async(proxy, ^{
-        [self doRunProxyLoop];
-    });
-
-    originalPACData = [[NSData dataWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"proxy" withExtension:@"pac.gz"]] gunzippedData];
+    NSURL *url = [[NSBundle mainBundle] URLForResource:@"proxy" withExtension:@"pac.gz"];
+    originalPACData = [[NSData dataWithContentsOfURL:url] gunzippedData];
     GCDWebServer *webServer = [[GCDWebServer alloc] init];
-    [webServer addHandlerForMethod:@"GET" path:@"/proxy.pac" requestClass:[GCDWebServerRequest class] processBlock:^GCDWebServerResponse *(GCDWebServerRequest *request) {
-        return [GCDWebServerDataResponse responseWithData:[self PACData] contentType:@"application/x-ns-proxy-autoconfig"];
-    }
-    ];
+    [webServer addHandlerForMethod:@"GET"
+                              path:@"/proxy.pac"
+                      requestClass:[GCDWebServerRequest class]
+                      processBlock:^GCDWebServerResponse *(GCDWebServerRequest *request)
+     {
+         return [GCDWebServerDataResponse responseWithData:[self PACData] contentType:@"application/x-ns-proxy-autoconfig"];
+     }];
 
     [webServer startWithPort:8090 bonjourName:@"webserver"];
 
@@ -81,13 +82,9 @@ static SWBAppDelegate *appDelegate;
     [menu setMinimumWidth:200];
     
     statusMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"ShadowsocksR Off", nil) action:nil keyEquivalent:@""];
-    
     enableMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Turn ShadowsocksR Off", nil) action:@selector(toggleRunning) keyEquivalent:@""];
-//    [statusMenuItem setEnabled:NO];
     autoMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Auto Proxy Mode", nil) action:@selector(enableAutoProxy) keyEquivalent:@""];
-//    [enableMenuItem setState:1];
-    globalMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Global Mode", nil) action:@selector(enableGlobal)
-        keyEquivalent:@""];
+    globalMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Global Mode", nil) action:@selector(enableGlobal) keyEquivalent:@""];
     
     [menu addItem:statusMenuItem];
     [menu addItem:enableMenuItem];
@@ -117,9 +114,8 @@ static SWBAppDelegate *appDelegate;
     [menu addItem:[NSMenuItem separatorItem]];
     [menu addItemWithTitle:NSLocalizedString(@"Quit", nil) action:@selector(exit) keyEquivalent:@""];
     self.item.menu = menu;
-    [self installHelper];
-    [self initializeProxy];
 
+    [self initializeProxy];
     [self updateMenu];
 
     configPath = [NSString stringWithFormat:@"%@/%@", NSHomeDirectory(), @".ssrMac"];
@@ -127,6 +123,11 @@ static SWBAppDelegate *appDelegate;
     userRulePath = [NSString stringWithFormat:@"%@/%@", configPath, @"user-rule.txt"];
     [self monitorPAC:configPath];
     appDelegate = self;
+    
+    dispatch_queue_t proxy = dispatch_queue_create("proxy", NULL);
+    dispatch_async(proxy, ^{
+        [self doRunProxyLoop];
+    });
 }
 
 - (BOOL) useProxy {

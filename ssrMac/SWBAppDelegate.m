@@ -16,7 +16,7 @@
 #import "ProfileManager.h"
 #import <AFNetworking/AFNetworking.h>
 #import "qrCodeOnScreen.h"
-#include "ssr_executive.h"
+#include <ssrNative/ssrNative.h>
 
 #define kShadowsocksIsRunningKey @"ShadowsocksIsRunning"
 #define kShadowsocksRunningModeKey @"ShadowsocksMode"

@@ -8,8 +8,7 @@
 #import "SWBConfigWindowController.h"
 #import "ShadowsocksRunner.h"
 #import "ProfileManager.h"
-#import "encrypt.h"
-#include "ssr_cipher_names.h"
+#include <ssrNative/ssrNative.h>
 #import "KSPasswordField.h"
 
 

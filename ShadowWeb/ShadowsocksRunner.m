@@ -8,10 +8,7 @@
 #import "Profile.h"
 #import "Configuration.h"
 #import "ProfileManager.h"
-#include "ssr_executive.h"
-#include "defs.h"
-#include "ssr_qr_code.h"
-#include <uv.h>
+#include <ssrNative/ssrNative.h>
 
 struct server_config * build_config_object(Profile *profile, unsigned short listenPort) {
     const char *protocol = profile.protocol.UTF8String;

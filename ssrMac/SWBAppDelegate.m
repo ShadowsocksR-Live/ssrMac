@@ -495,7 +495,7 @@ void onPACChange(
         NSString *str2 = [[NSString alloc] initWithData:data2 encoding:NSUTF8StringEncoding];
         NSArray *lines = [str2 componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
         
-        NSString *str3 = [[NSString alloc] initWithContentsOfFile:userRulePath encoding:NSUTF8StringEncoding error:nil];
+        NSString *str3 = [[NSString alloc] initWithContentsOfFile:self->userRulePath encoding:NSUTF8StringEncoding error:nil];
         if (str3) {
             NSArray *rules = [str3 componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
             lines = [lines arrayByAddingObjectsFromArray:rules];
@@ -518,7 +518,7 @@ void onPACChange(
         NSData *data3 = [NSData dataWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"abp" withExtension:@"js"]];
         NSString *template = [[NSString alloc] initWithData:data3 encoding:NSUTF8StringEncoding];
         NSString *result = [template stringByReplacingOccurrencesOfString:@"__RULES__" withString:rules];
-        [[result dataUsingEncoding:NSUTF8StringEncoding] writeToFile:PACPath atomically:YES];
+        [[result dataUsingEncoding:NSUTF8StringEncoding] writeToFile:self->PACPath atomically:YES];
         NSAlert *alert = [[NSAlert alloc] init];
         alert.messageText = @"Updated";
         [alert runModal];

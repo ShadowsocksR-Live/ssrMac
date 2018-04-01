@@ -36,9 +36,9 @@ struct server_config * build_config_object(Profile *profile, unsigned short list
     return config;
 }
 
-struct run_loop_state *g_state = NULL;
+struct ssr_client_state *g_state = NULL;
 
-void feedback_state(struct run_loop_state *state, void *p) {
+void feedback_state(struct ssr_client_state *state, void *p) {
     g_state = state;
 }
 

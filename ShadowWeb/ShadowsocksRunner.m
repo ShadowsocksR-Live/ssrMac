@@ -42,9 +42,10 @@ void feedback_state(struct ssr_client_state *state, void *p) {
     g_state = state;
 }
 
-void ssr_main_loop(unsigned short listenPort) {
+void ssr_main_loop(unsigned short listenPort, const char *appPath) {
     struct server_config *config = NULL;
     do {
+        set_app_name(appPath);
         Profile *profile = [ShadowsocksRunner battleFrontGetProfile];
         config = build_config_object(profile, listenPort);
         if (config == NULL) {
@@ -84,11 +85,13 @@ void ssr_stop(void) {
     SWBAppDelegate *appDelegate = (SWBAppDelegate *) [NSApplication sharedApplication].delegate;
     NSAssert([appDelegate isKindOfClass:[SWBAppDelegate class]], @"SWBAppDelegate");
     
+    NSString *path = [NSBundle mainBundle].executablePath;
+    
     unsigned short listenPort = (unsigned short) [appDelegate toggleSystemProxyExternal];
     
     BOOL result = NO;
     if (![ShadowsocksRunner settingsAreNotComplete]) {
-        ssr_main_loop(listenPort);
+        ssr_main_loop(listenPort, path.UTF8String);
         result = YES;
     } else {
 #ifdef DEBUG

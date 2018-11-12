@@ -16,7 +16,6 @@
 		3A95CC362070EB8800E507E3 /* libsodium.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A95CC352070EB8800E507E3 /* libsodium.framework */; };
 		3A95CC382070EB8800E507E3 /* libuv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A95CC372070EB8800E507E3 /* libuv.framework */; };
 		3A95CC3A2070EB8800E507E3 /* mbedtls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A95CC392070EB8800E507E3 /* mbedtls.framework */; };
-		3A95CC3B2070EB8800E507E3 /* ssrNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A95CC322070EB0B00E507E3 /* ssrNative.framework */; };
 		3A95CC3D2070EBCB00E507E3 /* libuv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A95CC3C2070EBCB00E507E3 /* libuv.framework */; };
 		3A95CC3E2070EBCB00E507E3 /* libuv.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A95CC3C2070EBCB00E507E3 /* libuv.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3A95CC402070EBCB00E507E3 /* libsodium.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A95CC3F2070EBCB00E507E3 /* libsodium.framework */; };
@@ -387,7 +386,6 @@
 				3A95CC382070EB8800E507E3 /* libuv.framework in Frameworks */,
 				3A95CC3A2070EB8800E507E3 /* mbedtls.framework in Frameworks */,
 				3A95CC402070EBCB00E507E3 /* libsodium.framework in Frameworks */,
-				3A95CC3B2070EB8800E507E3 /* ssrNative.framework in Frameworks */,
 				3AD601822018D7F200403182 /* GZIP.framework in Frameworks */,
 				3A95CC3D2070EBCB00E507E3 /* libuv.framework in Frameworks */,
 				3AD6016C2018D56F00403182 /* AFNetworking.framework in Frameworks */,
@@ -670,7 +668,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = SWB;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = ssrLive;
 				TargetAttributes = {
 					6205309418D4443E00887D3E = {

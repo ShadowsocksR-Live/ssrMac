@@ -3,7 +3,6 @@
 // Copyright (c) 2014 clowwindy. All rights reserved.
 //
 
-#import <openssl/evp.h>
 #import <QuartzCore/QuartzCore.h>
 #import "SWBConfigWindowController.h"
 #import "ShadowsocksRunner.h"

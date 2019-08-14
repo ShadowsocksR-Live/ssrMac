@@ -2,8 +2,6 @@ ShadowsocksR client for macOS
 ===========================
 [![Build Status](https://travis-ci.org/shadowsocks/shadowsocks-iOS.svg?branch=master)](https://travis-ci.org/shadowsocks/shadowsocks-iOS)
 
-**ssrMac已開發完畢.由於用蘋果開發者帳號簽名軟件,形同直接洩漏開發者全部信息給中共,希望哪個中國大陸以外的蘋果開發者幫忙編譯後封包發送到電郵地址 ssrlivebox(at)gmail(dot)com 不勝感激. 作者不想被中共及其走狗,自乾五,逮個正著並送進監獄.**
-
 ![tu](server-settings.png)
 
 macOS

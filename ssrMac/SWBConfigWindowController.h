@@ -24,6 +24,9 @@
 @property (nonatomic, strong) IBOutlet NSComboBox *obfsBox;
 @property (nonatomic, strong) IBOutlet NSTextField *obfsParamField;
 @property (nonatomic, strong) IBOutlet NSTextField *remarksField;
+@property (nonatomic, weak) IBOutlet NSButton *ot_enableField;
+@property (nonatomic, weak) IBOutlet NSTextField *ot_domainField;
+@property (nonatomic, weak) IBOutlet NSTextField *ot_pathField;
 @property (nonatomic, strong) IBOutlet NSButton *okButton;
 @property (nonatomic, strong) IBOutlet NSButton *cancelButton;
 @property (nonatomic, strong) IBOutlet NSBox *settingsBox;

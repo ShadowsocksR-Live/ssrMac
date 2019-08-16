@@ -172,11 +172,12 @@
             [_obfsBox setStringValue:profile.obfs];
             [_obfsParamField setStringValue:profile.obfsParam];
             
-            if (profile.remarks) {
-                [_remarksField setStringValue:profile.remarks];
-            } else {
-                [_remarksField setStringValue:@""];
-            }
+            [_remarksField setStringValue:profile.remarks];
+
+            BOOL on = (profile.ot_enable != NO) ? YES : NO;
+            [_ot_enableField setState:(on ? NSControlStateValueOn : NSControlStateValueOff)];
+            [_ot_domainField setStringValue:profile.ot_domain]; _ot_domainField.enabled=on;
+            [_ot_pathField setStringValue:profile.ot_path]; _ot_pathField.enabled=on;
         }
     }
 }
@@ -197,6 +198,10 @@
         profile.protocolParam = [_protocolParamField stringValue];
         profile.obfs = [_obfsBox stringValue];
         profile.obfsParam = [_obfsParamField stringValue];
+        
+        profile.ot_enable = (_ot_enableField.state != NSControlStateValueOff);
+        profile.ot_domain = [_ot_domainField stringValue];
+        profile.ot_path = [_ot_pathField stringValue];
         
         profile.remarks = [_remarksField stringValue];
     }
@@ -251,6 +256,12 @@
 
 - (IBAction) passwordChkBoxClicked:(NSButton *)sender {
     [_passwordField setShowsText:(sender.state == NSOnState)];
+}
+
+- (IBAction)otEnableClicked:(NSButton *)sender {
+    BOOL on = (sender.state != NSControlStateValueOff);
+    _ot_domainField.enabled = on;
+    _ot_pathField.enabled = on;
 }
 
 - (void)shakeWindow {

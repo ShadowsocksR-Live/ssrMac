@@ -19,7 +19,7 @@ struct server_config * build_config_object(Profile *profile, unsigned short list
 
     struct server_config *config = config_create();
 
-    config->udp = true;
+    // config->udp = true;
     config->listen_port = listenPort;
     string_safe_assign(&config->method, profile.method.UTF8String);
     string_safe_assign(&config->remote_host, profile.server.UTF8String);
@@ -29,6 +29,10 @@ struct server_config * build_config_object(Profile *profile, unsigned short list
     string_safe_assign(&config->protocol_param, profile.protocolParam.UTF8String);
     string_safe_assign(&config->obfs, profile.obfs.UTF8String);
     string_safe_assign(&config->obfs_param, profile.obfsParam.UTF8String);
+    string_safe_assign(&config->remarks, profile.remarks.UTF8String);
+    config->over_tls_enable = (profile.ot_enable != NO);
+    string_safe_assign(&config->over_tls_server_domain, profile.ot_domain.UTF8String);
+    string_safe_assign(&config->over_tls_path, profile.ot_path.UTF8String);
 
     return config;
 }
@@ -125,7 +129,10 @@ void ssr_stop(void) {
     profile.protocolParam = [NSString stringWithUTF8String:config->protocol_param?:""];
     profile.obfs = [NSString stringWithUTF8String:config->obfs];
     profile.obfsParam = [NSString stringWithUTF8String:config->obfs_param?:""];
-    
+    profile.ot_enable = (config->over_tls_enable != false);
+    profile.ot_domain = [NSString stringWithUTF8String:config->over_tls_server_domain?:""];
+    profile.ot_path = [NSString stringWithUTF8String:config->over_tls_path?:""];
+
     profile.remarks = [NSString stringWithUTF8String:config->remarks?:""];
 
     config_release(config);
@@ -181,6 +188,10 @@ void ssr_stop(void) {
     [ShadowsocksRunner saveConfigForKey:kShadowsocksProtocolParamKey value:profile.protocolParam];
     [ShadowsocksRunner saveConfigForKey:kShadowsocksObfsKey value:profile.obfs];
     [ShadowsocksRunner saveConfigForKey:kShadowsocksObfsParamKey value:profile.obfsParam];
+    
+    [ShadowsocksRunner saveConfigForKey:kShadowsocksOtEnableKey value:[NSString stringWithFormat:@"%ld", (long)profile.ot_enable]];
+    [ShadowsocksRunner saveConfigForKey:kShadowsocksOtDomainKey value:profile.ot_domain];
+    [ShadowsocksRunner saveConfigForKey:kShadowsocksOtPathKey value:profile.ot_path];
 }
 
 + (Profile *) battleFrontGetProfile {
@@ -212,6 +223,15 @@ void ssr_stop(void) {
 
     NSString *obfsParam = [ShadowsocksRunner configForKey:kShadowsocksObfsParamKey];
     profile.obfsParam = [obfsParam isKindOfClass:[NSString class]] ? obfsParam : @"";
+
+    NSString *ot_enable = [ShadowsocksRunner configForKey:kShadowsocksOtEnableKey];
+    profile.ot_enable = [ot_enable isKindOfClass:[NSString class]] ? (ot_enable.integerValue != 0) : NO;
+
+    NSString *ot_domain = [ShadowsocksRunner configForKey:kShadowsocksOtDomainKey];
+    profile.ot_domain = [ot_domain isKindOfClass:[NSString class]] ? ot_domain : @"";
+
+    NSString *ot_path = [ShadowsocksRunner configForKey:kShadowsocksOtPathKey];
+    profile.ot_path = [ot_path isKindOfClass:[NSString class]] ? ot_path : @"";
 
     return profile;
 }

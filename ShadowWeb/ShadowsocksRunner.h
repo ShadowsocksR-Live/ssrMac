@@ -17,6 +17,10 @@
 #define kShadowsocksObfsKey @"proxy obfs"
 #define kShadowsocksObfsParamKey @"proxy obfsParam"
 
+#define kShadowsocksOtEnableKey @"ot_enable"
+#define kShadowsocksOtDomainKey @"ot_domain"
+#define kShadowsocksOtPathKey @"ot_path"
+
 #define kShadowsocksProxyModeKey @"proxy mode"
 
 @class Profile;

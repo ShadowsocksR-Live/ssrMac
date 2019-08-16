@@ -11,6 +11,9 @@ static const NSString *protocolString = @"protocol";
 static const NSString *protocolParamString = @"protocolParam";
 static const NSString *obfsString = @"obfs";
 static const NSString *obfsParamString = @"obfsParam";
+static const NSString *ot_enableString = @"ot_enable";
+static const NSString *ot_domainString = @"ot_domain";
+static const NSString *ot_pathString = @"ot_path";
 
 @interface Profile : NSObject
 
@@ -29,5 +32,9 @@ static const NSString *obfsParamString = @"obfsParam";
 @property(nonatomic, copy) NSString *protocolParam;
 @property(nonatomic, copy) NSString *obfs;
 @property(nonatomic, copy) NSString *obfsParam;
+
+@property(nonatomic, assign) BOOL ot_enable;
+@property(nonatomic, copy) NSString *ot_domain;
+@property(nonatomic, copy) NSString *ot_path;
 
 @end

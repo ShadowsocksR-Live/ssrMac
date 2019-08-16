@@ -1,4 +1,4 @@
-ShadowsocksR client for macOS
+ShadowsocksR client with SSRoT for macOS
 ===========================
 [![Build Status](https://travis-ci.org/shadowsocks/shadowsocks-iOS.svg?branch=master)](https://travis-ci.org/shadowsocks/shadowsocks-iOS)
 

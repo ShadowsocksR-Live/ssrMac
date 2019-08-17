@@ -43,10 +43,16 @@ void feedback_state(struct ssr_client_state *state, void *p) {
     g_state = state;
 }
 
+void dump_info_callback(const char *info, void *p) {
+    (void)p;
+    printf("%s", info);
+}
+
 void ssr_main_loop(unsigned short listenPort, const char *appPath) {
     struct server_config *config = NULL;
     do {
         set_app_name(appPath);
+        set_dump_info_callback(&dump_info_callback, NULL);
         Profile *profile = [ShadowsocksRunner battleFrontGetProfile];
         config = build_config_object(profile, listenPort);
         if (config == NULL) {

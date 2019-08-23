@@ -114,16 +114,7 @@ void ssr_stop(void) {
     }
 }
 
-+ (BOOL)openSSURL:(NSURL *)url {
-    if (!url.host) {
-        return NO;
-    }
-    
-    struct server_config *config = ssr_qr_code_decode([url absoluteString].UTF8String);
-    if (config == NULL) {
-        return NO;
-    }
-    
++ (Profile *) profileFromServerConfig:(struct server_config *)config {
     Profile *profile = [[Profile alloc] init];
     
     profile.method = [NSString stringWithUTF8String:config->method];
@@ -138,13 +129,28 @@ void ssr_stop(void) {
     profile.ot_enable = (config->over_tls_enable != false);
     profile.ot_domain = [NSString stringWithUTF8String:config->over_tls_server_domain?:""];
     profile.ot_path = [NSString stringWithUTF8String:config->over_tls_path?:""];
-
+    
     profile.remarks = [NSString stringWithUTF8String:config->remarks?:""];
+
+    return profile;
+}
+
++ (BOOL)openSSURL:(NSURL *)url {
+    if (!url.host) {
+        return NO;
+    }
+    
+    struct server_config *config = ssr_qr_code_decode([url absoluteString].UTF8String);
+    if (config == NULL) {
+        return NO;
+    }
+    
+    Profile *profile = [[self class] profileFromServerConfig:config];
 
     config_release(config);
 
     Configuration *configuration = [ProfileManager configuration];
-    [((NSMutableArray *) configuration.profiles) addObject:profile];
+    [configuration.profiles addObject:profile];
     [ProfileManager saveConfiguration:configuration];
     
     [ShadowsocksRunner reloadConfig];

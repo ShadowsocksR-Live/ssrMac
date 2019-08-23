@@ -7,21 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A09F8E823101ADC0073E0EE /* libuv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A09F8E723101ADC0073E0EE /* libuv.framework */; };
+		3A09F8E923101ADC0073E0EE /* libuv.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A09F8E723101ADC0073E0EE /* libuv.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3A09F8EB23101ADC0073E0EE /* libsodium.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A09F8EA23101ADC0073E0EE /* libsodium.framework */; };
+		3A09F8EC23101ADC0073E0EE /* libsodium.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A09F8EA23101ADC0073E0EE /* libsodium.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3A09F8EE23101ADD0073E0EE /* mbedtls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A09F8ED23101ADD0073E0EE /* mbedtls.framework */; };
+		3A09F8EF23101ADD0073E0EE /* mbedtls.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A09F8ED23101ADD0073E0EE /* mbedtls.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3A1A998D2022FFF000889D2E /* KSPasswordField.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1A997A2022FFF000889D2E /* KSPasswordField.m */; };
 		3A40B2D12019E0BC00F33F80 /* qrCodeOnScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A40B2D02019E0BC00F33F80 /* qrCodeOnScreen.m */; };
 		3A4AAEB4201B2FB7002F23AF /* ConfigWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A4AAEB3201B2FB7002F23AF /* ConfigWindow.xib */; };
 		3A8E4A5420219874002E2FBA /* AFNetworking.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3AD6015F2018D50D00403182 /* AFNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3A8E4A572021993D002E2FBA /* GZIP.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3AD601792018D7C900403182 /* GZIP.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3A8E4A5C2021993D002E2FBA /* GCDWebServers.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3AD601492018D47800403182 /* GCDWebServers.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3A95CC362070EB8800E507E3 /* libsodium.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A95CC352070EB8800E507E3 /* libsodium.framework */; };
-		3A95CC382070EB8800E507E3 /* libuv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A95CC372070EB8800E507E3 /* libuv.framework */; };
-		3A95CC3A2070EB8800E507E3 /* mbedtls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A95CC392070EB8800E507E3 /* mbedtls.framework */; };
-		3A95CC3D2070EBCB00E507E3 /* libuv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A95CC3C2070EBCB00E507E3 /* libuv.framework */; };
-		3A95CC3E2070EBCB00E507E3 /* libuv.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A95CC3C2070EBCB00E507E3 /* libuv.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3A95CC402070EBCB00E507E3 /* libsodium.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A95CC3F2070EBCB00E507E3 /* libsodium.framework */; };
-		3A95CC412070EBCB00E507E3 /* libsodium.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A95CC3F2070EBCB00E507E3 /* libsodium.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3A95CC432070EBCB00E507E3 /* mbedtls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A95CC422070EBCB00E507E3 /* mbedtls.framework */; };
-		3A95CC442070EBCB00E507E3 /* mbedtls.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A95CC422070EBCB00E507E3 /* mbedtls.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3A95CC452070EBCB00E507E3 /* ssrNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A95CC322070EB0B00E507E3 /* ssrNative.framework */; };
 		3A95CC462070EBCB00E507E3 /* ssrNative.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A95CC322070EB0B00E507E3 /* ssrNative.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3ACA8CCB2019C17800839E41 /* ShadowsocksRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ACA8CC92019C17800839E41 /* ShadowsocksRunner.m */; };
@@ -264,11 +261,11 @@
 			dstSubfolderSpec = 10;
 			files = (
 				3A8E4A572021993D002E2FBA /* GZIP.framework in CopyFiles */,
-				3A95CC3E2070EBCB00E507E3 /* libuv.framework in CopyFiles */,
 				3A95CC462070EBCB00E507E3 /* ssrNative.framework in CopyFiles */,
 				3A8E4A5420219874002E2FBA /* AFNetworking.framework in CopyFiles */,
-				3A95CC412070EBCB00E507E3 /* libsodium.framework in CopyFiles */,
-				3A95CC442070EBCB00E507E3 /* mbedtls.framework in CopyFiles */,
+				3A09F8EC23101ADC0073E0EE /* libsodium.framework in CopyFiles */,
+				3A09F8EF23101ADD0073E0EE /* mbedtls.framework in CopyFiles */,
+				3A09F8E923101ADC0073E0EE /* libuv.framework in CopyFiles */,
 				3A8E4A5C2021993D002E2FBA /* GCDWebServers.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,6 +273,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3A09F8E723101ADC0073E0EE /* libuv.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = libuv.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A09F8EA23101ADC0073E0EE /* libsodium.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = libsodium.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A09F8ED23101ADD0073E0EE /* mbedtls.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = mbedtls.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A1A997A2022FFF000889D2E /* KSPasswordField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSPasswordField.m; sourceTree = "<group>"; };
 		3A1A998C2022FFF000889D2E /* KSPasswordField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSPasswordField.h; sourceTree = "<group>"; };
 		3A40B2CF2019E0BC00F33F80 /* qrCodeOnScreen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = qrCodeOnScreen.h; sourceTree = "<group>"; };
@@ -286,9 +286,6 @@
 		3A95CC352070EB8800E507E3 /* libsodium.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = libsodium.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A95CC372070EB8800E507E3 /* libuv.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = libuv.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A95CC392070EB8800E507E3 /* mbedtls.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = mbedtls.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A95CC3C2070EBCB00E507E3 /* libuv.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = libuv.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A95CC3F2070EBCB00E507E3 /* libsodium.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = libsodium.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A95CC422070EBCB00E507E3 /* mbedtls.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = mbedtls.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ACA8C8920199CB500839E41 /* libsodium.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsodium.a; path = /usr/local/lib/libsodium.a; sourceTree = "<group>"; };
 		3ACA8C8B20199CBA00839E41 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = /usr/local/lib/libcrypto.a; sourceTree = "<group>"; };
 		3ACA8CC92019C17800839E41 /* ShadowsocksRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShadowsocksRunner.m; path = ShadowWeb/ShadowsocksRunner.m; sourceTree = SOURCE_ROOT; };
@@ -382,16 +379,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A95CC452070EBCB00E507E3 /* ssrNative.framework in Frameworks */,
-				3A95CC362070EB8800E507E3 /* libsodium.framework in Frameworks */,
-				3A95CC382070EB8800E507E3 /* libuv.framework in Frameworks */,
-				3A95CC3A2070EB8800E507E3 /* mbedtls.framework in Frameworks */,
-				3A95CC402070EBCB00E507E3 /* libsodium.framework in Frameworks */,
 				3AD601822018D7F200403182 /* GZIP.framework in Frameworks */,
-				3A95CC3D2070EBCB00E507E3 /* libuv.framework in Frameworks */,
+				3A09F8EE23101ADD0073E0EE /* mbedtls.framework in Frameworks */,
 				3AD6016C2018D56F00403182 /* AFNetworking.framework in Frameworks */,
-				3A95CC432070EBCB00E507E3 /* mbedtls.framework in Frameworks */,
+				3A09F8EB23101ADC0073E0EE /* libsodium.framework in Frameworks */,
 				3AD6016D2018D56F00403182 /* GCDWebServers.framework in Frameworks */,
 				628C91C61A07B6C800BA1566 /* QuartzCore.framework in Frameworks */,
+				3A09F8E823101ADC0073E0EE /* libuv.framework in Frameworks */,
 				62E27E5E18C1D1000086033D /* libz.dylib in Frameworks */,
 				627A6DF918B47E9300493BBC /* Cocoa.framework in Frameworks */,
 				625E5BBE19EA3855007A5124 /* WebKit.framework in Frameworks */,
@@ -472,9 +466,9 @@
 		6215719C16CF6BCA003D96B4 = {
 			isa = PBXGroup;
 			children = (
-				3A95CC422070EBCB00E507E3 /* mbedtls.framework */,
-				3A95CC3F2070EBCB00E507E3 /* libsodium.framework */,
-				3A95CC3C2070EBCB00E507E3 /* libuv.framework */,
+				3A09F8ED23101ADD0073E0EE /* mbedtls.framework */,
+				3A09F8EA23101ADC0073E0EE /* libsodium.framework */,
+				3A09F8E723101ADC0073E0EE /* libuv.framework */,
 				621571AE16CF6BCB003D96B4 /* ShadowWeb */,
 				627A6DFE18B47E9300493BBC /* ssrMac */,
 				6205309718D4443E00887D3E /* ssr_mac_sysconf */,

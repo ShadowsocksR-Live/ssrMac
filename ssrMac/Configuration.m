@@ -3,31 +3,27 @@
 #import "Configuration.h"
 
 @implementation Configuration  {
-
 }
 
-- (id)initWithJSONDictionary:(NSDictionary *)dictionary {
+- (instancetype) initWithJSONDictionary:(NSDictionary *)dictionary {
 
     self = [super init];
-    if (![dictionary isKindOfClass:[NSDictionary class]])
+    if (![dictionary isKindOfClass:[NSDictionary class]]) {
         return nil;
+    }
 
     if (self) {
- 
         self.current = (dictionary[@"current"] != [NSNull null]) ? [dictionary[@"current"] integerValue] : 0;
   
         self.profiles = [[NSMutableArray alloc] initWithCapacity:16];
-        for (NSDictionary *_ in dictionary[@"profiles"]) {
-            
-                [((NSMutableArray *)self.profiles) addObject:[[Profile alloc] initWithJSONDictionary:_]];
-            
+        for (NSDictionary *iter in dictionary[@"profiles"]) {
+            [self.profiles addObject:[[Profile alloc] initWithJSONDictionary:iter]];
         }
- 
     }
     return self;
 }
 
-- (id)initWithJSONData:(NSData *)data {
+- (instancetype) initWithJSONData:(NSData *)data {
     self = [super init];
     if (self) {
         NSError *error = nil;
@@ -44,27 +40,21 @@
 - (NSDictionary *)JSONDictionary {
 
     NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
-
  
     dictionary[@"current"] = @(self.current);
   
     {
-        NSMutableArray *_ = [[NSMutableArray alloc] init];
-        dictionary[@"profiles"] = _;
-        
-        for (Profile *__ in self.profiles) {
-            
-                [_ addObject:[__ JSONDictionary]];
-            
+        NSMutableArray *profiles = [[NSMutableArray alloc] init];
+        for (Profile *iter in self.profiles) {
+            [profiles addObject:[iter JSONDictionary]];
         }
-        
+        dictionary[@"profiles"] = profiles;
     }
  
     return dictionary;
 }
 
-
-- (NSData *)JSONData {
+- (NSData *) JSONData {
     NSError *error = nil;
     NSData *data = [NSJSONSerialization dataWithJSONObject:[self JSONDictionary] options:0 error:&error];
     if (error) {
@@ -72,6 +62,5 @@
     }
     return data;
 }
-
 
 @end

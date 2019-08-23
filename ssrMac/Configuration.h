@@ -14,7 +14,7 @@
 
 @property (nonatomic, assign) NSInteger current;
 
-@property (nonatomic, strong) NSArray * profiles;
+@property (nonatomic, strong) NSMutableArray<Profile *> *profiles;
 
 
 @end

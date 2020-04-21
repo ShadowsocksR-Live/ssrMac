@@ -482,7 +482,7 @@ void onPACChange(
 
 - (void)updatePACFromGFWList {
     NSString *gfwList = @"https://autoproxy-gfwlist.googlecode.com/svn/trunk/gfwlist.txt";
-    [manager GET:gfwList parameters:nil progress:nil success:^(NSURLSessionTask *task, id responseObject) {
+    [manager GET:gfwList parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         // Objective-C is bullshit
         NSData *data = responseObject;
         NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];

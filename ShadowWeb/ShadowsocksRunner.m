@@ -89,7 +89,10 @@ void ssr_stop(void) {
 }
 
 + (BOOL) runProxy {
-    SWBAppDelegate *appDelegate = (SWBAppDelegate *) [NSApplication sharedApplication].delegate;
+    __block SWBAppDelegate *appDelegate;
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        appDelegate = (SWBAppDelegate *) [NSApplication sharedApplication].delegate;
+    });
     NSAssert([appDelegate isKindOfClass:[SWBAppDelegate class]], @"SWBAppDelegate");
     
     NSString *path = [NSBundle mainBundle].executablePath;

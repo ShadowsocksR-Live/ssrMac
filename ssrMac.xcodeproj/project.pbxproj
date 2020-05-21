@@ -202,33 +202,12 @@
 			remoteGlobalIDString = CEE28CD01AE004D800F4023C;
 			remoteInfo = "GCDWebServers (Mac)";
 		};
-		3AD601762018D7C900403182 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3AD6016E2018D7C900403182 /* GZIP.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3AE36CBF1B8F598E00923C2D;
-			remoteInfo = "GZIP-iOS";
-		};
 		3AD601782018D7C900403182 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3AD6016E2018D7C900403182 /* GZIP.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 3AE36CDB1B8F5AEF00923C2D;
 			remoteInfo = "GZIP-macOS";
-		};
-		3AD6017A2018D7C900403182 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3AD6016E2018D7C900403182 /* GZIP.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 010299581ECD993000044867;
-			remoteInfo = "GZIP-tvOS";
-		};
-		3AD6017C2018D7C900403182 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3AD6016E2018D7C900403182 /* GZIP.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3AB1CB071B8F671100D54E3D;
-			remoteInfo = "GZIP-watchOS";
 		};
 		3AD6017E2018D7C900403182 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -437,10 +416,7 @@
 		3AD6016F2018D7C900403182 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3AD601772018D7C900403182 /* GZIP.framework */,
 				3AD601792018D7C900403182 /* GZIP.framework */,
-				3AD6017B2018D7C900403182 /* GZIP.framework */,
-				3AD6017D2018D7C900403182 /* GZIP.framework */,
 				3AD6017F2018D7C900403182 /* GZIPTests.xctest */,
 			);
 			name = Products;
@@ -825,32 +801,11 @@
 			remoteRef = 3AD601662018D50D00403182 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		3AD601772018D7C900403182 /* GZIP.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = GZIP.framework;
-			remoteRef = 3AD601762018D7C900403182 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		3AD601792018D7C900403182 /* GZIP.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = GZIP.framework;
 			remoteRef = 3AD601782018D7C900403182 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3AD6017B2018D7C900403182 /* GZIP.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = GZIP.framework;
-			remoteRef = 3AD6017A2018D7C900403182 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3AD6017D2018D7C900403182 /* GZIP.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = GZIP.framework;
-			remoteRef = 3AD6017C2018D7C900403182 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		3AD6017F2018D7C900403182 /* GZIPTests.xctest */ = {

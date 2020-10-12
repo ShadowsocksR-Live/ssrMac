@@ -21,6 +21,7 @@
 		3A8E4A5C2021993D002E2FBA /* GCDWebServers.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3AD601492018D47800403182 /* GCDWebServers.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3A95CC452070EBCB00E507E3 /* ssrNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A95CC322070EB0B00E507E3 /* ssrNative.framework */; };
 		3A95CC462070EBCB00E507E3 /* ssrNative.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A95CC322070EB0B00E507E3 /* ssrNative.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3ABFEC872534AC8100A12D18 /* net_port_is_free.c in Sources */ = {isa = PBXBuildFile; fileRef = 3ABFEC862534AC8100A12D18 /* net_port_is_free.c */; };
 		3ACA8CCB2019C17800839E41 /* ShadowsocksRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ACA8CC92019C17800839E41 /* ShadowsocksRunner.m */; };
 		3AD6016C2018D56F00403182 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD6015F2018D50D00403182 /* AFNetworking.framework */; };
 		3AD6016D2018D56F00403182 /* GCDWebServers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD601492018D47800403182 /* GCDWebServers.framework */; };
@@ -265,6 +266,8 @@
 		3A95CC352070EB8800E507E3 /* libsodium.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = libsodium.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A95CC372070EB8800E507E3 /* libuv.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = libuv.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A95CC392070EB8800E507E3 /* mbedtls.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = mbedtls.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3ABFEC852534AC8100A12D18 /* net_port_is_free.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = net_port_is_free.h; sourceTree = "<group>"; };
+		3ABFEC862534AC8100A12D18 /* net_port_is_free.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = net_port_is_free.c; sourceTree = "<group>"; };
 		3ACA8C8920199CB500839E41 /* libsodium.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsodium.a; path = /usr/local/lib/libsodium.a; sourceTree = "<group>"; };
 		3ACA8C8B20199CBA00839E41 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = /usr/local/lib/libcrypto.a; sourceTree = "<group>"; };
 		3ACA8CC92019C17800839E41 /* ShadowsocksRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShadowsocksRunner.m; path = ShadowWeb/ShadowsocksRunner.m; sourceTree = SOURCE_ROOT; };
@@ -548,6 +551,8 @@
 				3A1A998C2022FFF000889D2E /* KSPasswordField.h */,
 				3A1A997A2022FFF000889D2E /* KSPasswordField.m */,
 				625E5BBB19EA36D2007A5124 /* SWBQRCodeWindowController.h */,
+				3ABFEC852534AC8100A12D18 /* net_port_is_free.h */,
+				3ABFEC862534AC8100A12D18 /* net_port_is_free.c */,
 				625E5BBC19EA36D2007A5124 /* SWBQRCodeWindowController.m */,
 				628C91C21A07AB4500BA1566 /* Configuration.h */,
 				628C91C31A07AB4500BA1566 /* Configuration.m */,
@@ -864,6 +869,7 @@
 				627A6E0C18B47E9300493BBC /* SWBAppDelegate.m in Sources */,
 				3A1A998D2022FFF000889D2E /* KSPasswordField.m in Sources */,
 				EB1897A04CF0382A754FE700 /* SWBConfigWindowController.m in Sources */,
+				3ABFEC872534AC8100A12D18 /* net_port_is_free.c in Sources */,
 				625E5BBD19EA36D2007A5124 /* SWBQRCodeWindowController.m in Sources */,
 				3ACA8CCB2019C17800839E41 /* ShadowsocksRunner.m in Sources */,
 				EB189FE30A2E13F4D10D59ED /* SWBApplication.m in Sources */,

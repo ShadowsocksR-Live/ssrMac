@@ -17,6 +17,7 @@
 #import <AFNetworking/AFNetworking.h>
 #import "qrCodeOnScreen.h"
 #include <ssrNative/ssrNative.h>
+#include "net_port_is_free.h"
 
 #define kShadowsocksIsRunningKey @"ShadowsocksIsRunning"
 #define kShadowsocksRunningModeKey @"ShadowsocksMode"
@@ -447,6 +448,13 @@ void onPACChange(
     } else {
         mode = @"off";
     }
+    
+    do {
+        if (net_port_is_free(DEFAULT_BIND_HOST, (uint16_t)_listenPort)) {
+            break;
+        }
+        ++_listenPort;
+    } while(true);
 
     NSString *portStr = [NSString stringWithFormat:@"%ld", (long)_listenPort];
 

@@ -59,6 +59,8 @@ void ssr_main_loop(unsigned short listenPort, const char *appPath) {
             break;
         }
 
+        config_ssrot_revision(config);
+
         if (config->method == NULL || config->password==NULL || config->remote_host==NULL) {
             break;
         }

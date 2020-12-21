@@ -43,7 +43,7 @@ void feedback_state(struct ssr_client_state *state, void *p) {
     g_state = state;
 }
 
-void dump_info_callback(const char *info, void *p) {
+void dump_info_callback(int dump_level, const char *info, void *p) {
     (void)p;
     printf("%s", info);
 }

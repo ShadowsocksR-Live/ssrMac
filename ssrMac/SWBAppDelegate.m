@@ -108,6 +108,8 @@ static SWBAppDelegate *appDelegate;
     [menu addItem:[NSMenuItem separatorItem]];
     qrCodeMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Generate QR Code...", nil) action:@selector(showQRCode) keyEquivalent:@""];
     [menu addItem:qrCodeMenuItem];
+    [menu addItem:[NSMenuItem separatorItem]];
+    [menu addItem:[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Import URL from clipboard...", nil) action:@selector(importUrlFromClipboard) keyEquivalent:@""]];
     [menu addItem:[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Scan QR Code from Screen...", nil) action:@selector(scanQRCode) keyEquivalent:@""]];
     [menu addItem:[NSMenuItem separatorItem]];
     [menu addItemWithTitle:NSLocalizedString(@"Show Logs...", nil) action:@selector(showLogs) keyEquivalent:@""];
@@ -306,6 +308,15 @@ void onPACChange(
         [qrCodeWindowController.window makeKeyAndOrderFront:nil];
     } else {
         // TODO
+    }
+}
+
+- (void) importUrlFromClipboard {
+    NSPasteboard *board = [NSPasteboard generalPasteboard];
+    NSPasteboardItem *strObj = [[board pasteboardItems] firstObject];
+    NSString *str = [strObj stringForType:NSPasteboardTypeString];
+    if ([str isKindOfClass:[NSString class]]) {
+        [self dealWithIncomingURL:str];
     }
 }
 

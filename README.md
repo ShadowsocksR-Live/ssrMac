@@ -2,7 +2,7 @@ ShadowsocksR client with SSRoT for macOS
 ===========================
 [![Build Status](https://travis-ci.org/shadowsocks/shadowsocks-iOS.svg?branch=master)](https://travis-ci.org/shadowsocks/shadowsocks-iOS)
 
-![img03](https://user-images.githubusercontent.com/30760636/148062112-2be043d8-3a24-48bb-a6a5-6912eea27ed9.png)
+![img04](https://user-images.githubusercontent.com/30760636/148067488-27cc56ed-4f10-49a1-8b78-ef467aadc216.png)
 
 ![tu](server-settings.png)
 

@@ -19,6 +19,7 @@
 #include <ssrNative/ssrNative.h>
 #include "net_port_is_free.h"
 
+#define kListenPortKey @"listenPort"
 #define kShadowsocksIsRunningKey @"ShadowsocksIsRunning"
 #define kShadowsocksRunningModeKey @"ShadowsocksMode"
 #define kShadowsocksHelper @"/Library/Application Support/ssrMac/ssr_mac_sysconf"
@@ -27,6 +28,7 @@
 @interface SWBAppDelegate () <SWBConfigWindowControllerDelegate>
 @property(nonatomic, assign) BOOL useProxy;
 @property(nonatomic, strong) NSString *runningMode;
+@property(nonatomic, assign) NSInteger listenPort;
 @end
 
 @implementation SWBAppDelegate {
@@ -44,7 +46,6 @@
     NSString *PACPath;
     NSString *userRulePath;
     AFHTTPSessionManager *manager;
-    NSInteger _listenPort;
 }
 
 static SWBAppDelegate *appDelegate;
@@ -52,8 +53,6 @@ static SWBAppDelegate *appDelegate;
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     [self installHelper];
 
-    _listenPort = DEFAULT_BIND_PORT;
-    
     NSAppleEventManager *m = [NSAppleEventManager sharedAppleEventManager];
     [m setEventHandler:self andSelector:@selector(handleURLEvent:withReplyEvent:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
 
@@ -201,17 +200,26 @@ static SWBAppDelegate *appDelegate;
 
 - (void) updateMenu {
     if (self.useProxy) {
-        statusMenuItem.title = NSLocalizedString(@"ShadowsocksR: On", nil);
+        NSString *status = NSLocalizedString(@"ShadowsocksR: On", nil);
+        if (self.workingListenPort > 0) {
+            status = [status stringByAppendingFormat:@" - port %ld", self.workingListenPort];
+        }
+        statusMenuItem.title = status;
+
         enableMenuItem.title = NSLocalizedString(@"Turn ShadowsocksR Off", nil);
         NSImage *image = [NSImage imageNamed:@"menu_icon"];
         [image setTemplate:YES];
-        self.item.image = image;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.item.image = image;
+        });
     } else {
         statusMenuItem.title = NSLocalizedString(@"ShadowsocksR: Off", nil);
         enableMenuItem.title = NSLocalizedString(@"Turn ShadowsocksR On", nil);
         NSImage *image = [NSImage imageNamed:@"menu_icon_disabled"];
         [image setTemplate:YES];
-        self.item.image = image;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.item.image = image;
+        });
     }
 
     NSString *mode = [self runningMode];
@@ -243,8 +251,8 @@ void onPACChange(
 
 - (void) reloadSystemProxy {
     if (self.useProxy) {
-        [self toggleSystemProxy:NO];
-        [self toggleSystemProxy:YES];
+        [self modifySystemProxySettings:NO port:0];
+        [self modifySystemProxySettings:YES port:self.workingListenPort];
     }
 }
 
@@ -350,7 +358,7 @@ void onPACChange(
 - (void) applicationWillTerminate:(NSNotification *)notification {
     NSLog(@"terminating");
     if (self.useProxy) {
-        [self toggleSystemProxy:NO];
+        [self modifySystemProxySettings:NO port:0];
     }
 }
 
@@ -420,7 +428,7 @@ void onPACChange(
 
 - (void) initializeProxy {
     if (self.useProxy) {
-        [self toggleSystemProxy:YES];
+        [self modifySystemProxySettings:YES port:self.workingListenPort];
     }
     [self updateMenu];
 }
@@ -428,7 +436,7 @@ void onPACChange(
 - (void) toggleRunning {
     BOOL tmp = ! self.useProxy;
     self.useProxy = tmp;
-    [self toggleSystemProxy:tmp];
+    [self modifySystemProxySettings:tmp port:self.workingListenPort];
     [self updateMenu];
 }
 
@@ -444,12 +452,37 @@ void onPACChange(
     [[NSUserDefaults standardUserDefaults] setValue:runningMode forKey:kShadowsocksRunningModeKey];
 }
 
-- (NSInteger) toggleSystemProxyExternal {
-    [self toggleSystemProxy:self.useProxy];
-    return _listenPort;
+- (void) setWorkingListenPort:(NSInteger)workingListenPort {
+    _workingListenPort = workingListenPort;
+    [self updateMenu];
 }
 
-- (void) toggleSystemProxy:(BOOL)useProxy {
+- (NSInteger) listenPort {
+    NSNumber *tmp = [[NSUserDefaults standardUserDefaults] objectForKey:kListenPortKey];
+    return [tmp isKindOfClass:[NSNumber class]]?tmp.integerValue:0;
+}
+
+- (void) setListenPort:(NSInteger)listenPort {
+    [[NSUserDefaults standardUserDefaults] setValue:@(listenPort) forKey:kListenPortKey];
+}
+
+// Correct the listening port
+- (NSInteger) correctListenPort {
+    NSInteger port = self.listenPort;
+    do {
+        if (port == 0) {
+            // if listen port is zero, do nothing, just skip.
+            break;
+        }
+        if (net_port_is_free(DEFAULT_BIND_HOST, (uint16_t)port)) {
+            break;
+        }
+        ++port;
+    } while(true);
+    return port;
+}
+
+- (void) modifySystemProxySettings:(BOOL)useProxy port:(NSInteger)port {
     NSTask *task = [[NSTask alloc] init];
     [task setLaunchPath:kShadowsocksHelper];
 
@@ -459,15 +492,8 @@ void onPACChange(
     } else {
         mode = @"off";
     }
-    
-    do {
-        if (net_port_is_free(DEFAULT_BIND_HOST, (uint16_t)_listenPort)) {
-            break;
-        }
-        ++_listenPort;
-    } while(true);
 
-    NSString *portStr = [NSString stringWithFormat:@"%ld", (long)_listenPort];
+    NSString *portStr = [NSString stringWithFormat:@"%ld", (long)port];
 
     // this log is very important
     NSLog(@"run ShadowsocksR helper: %@", kShadowsocksHelper);

@@ -10,7 +10,18 @@
 #import "ProfileManager.h"
 #include <ssrNative/ssrNative.h>
 
-struct server_config * build_config_object(Profile *profile, unsigned short listenPort) {
+static uint16_t retrieve_socket_port(int socket) {
+    char tmp[256] = { 0 }; // buffer size must big enough
+    socklen_t len = sizeof(tmp);
+    if (getsockname(socket, (struct sockaddr*)tmp, &len) != 0) {
+        return 0;
+    }
+    else {
+        return ntohs(((struct sockaddr_in*)tmp)->sin_port);
+    }
+}
+
+struct server_config * build_config_object(Profile *profile, unsigned short port) {
     const char *protocol = profile.protocol.UTF8String;
     if (protocol && strcmp(protocol, "verify_sha1") == 0) {
         // LOGI("The verify_sha1 protocol is deprecate! Fallback to origin protocol.");
@@ -20,7 +31,7 @@ struct server_config * build_config_object(Profile *profile, unsigned short list
     struct server_config *config = config_create();
 
     // config->udp = true;
-    config->listen_port = listenPort;
+    config->listen_port = port;
     string_safe_assign(&config->method, profile.method.UTF8String);
     string_safe_assign(&config->remote_host, profile.server.UTF8String);
     config->remote_port = (unsigned short) profile.serverPort;
@@ -41,6 +52,10 @@ struct ssr_client_state *g_state = NULL;
 
 void feedback_state(struct ssr_client_state *state, void *p) {
     g_state = state;
+    SWBAppDelegate *appDelegate = (__bridge SWBAppDelegate *)p;
+    int realPort = retrieve_socket_port(ssr_get_listen_socket_fd(state));
+    appDelegate.workingListenPort = realPort;
+    [appDelegate modifySystemProxySettings:YES port:realPort];
 }
 
 void dump_info_callback(int dump_level, const char *info, void *p) {
@@ -48,7 +63,7 @@ void dump_info_callback(int dump_level, const char *info, void *p) {
     printf("%s", info);
 }
 
-void ssr_main_loop(unsigned short listenPort, const char *appPath) {
+void ssr_main_loop(unsigned short listenPort, const char *appPath, void*p) {
     struct server_config *config = NULL;
     do {
         set_app_name(appPath);
@@ -65,7 +80,7 @@ void ssr_main_loop(unsigned short listenPort, const char *appPath) {
             break;
         }
 
-        ssr_run_loop_begin(config, &feedback_state, NULL);
+        ssr_run_loop_begin(config, &feedback_state, p);
         g_state = NULL;
     } while(0);
 
@@ -99,11 +114,12 @@ void ssr_stop(void) {
     
     NSString *path = [NSBundle mainBundle].executablePath;
     
-    unsigned short listenPort = (unsigned short) [appDelegate toggleSystemProxyExternal];
+    unsigned short port = (unsigned short) [appDelegate correctListenPort];
     
     BOOL result = NO;
     if (![ShadowsocksRunner settingsAreNotComplete]) {
-        ssr_main_loop(listenPort, path.UTF8String);
+        ssr_main_loop(port, path.UTF8String, (__bridge void *)(appDelegate));
+        usleep(200000);
         result = YES;
     } else {
 #ifdef DEBUG
@@ -116,6 +132,11 @@ void ssr_stop(void) {
 + (void) reloadConfig {
     if (![ShadowsocksRunner settingsAreNotComplete]) {
         ssr_stop();
+        dispatch_async(dispatch_get_main_queue(), ^{
+            SWBAppDelegate *appDelegate;
+            appDelegate = (SWBAppDelegate *) [NSApplication sharedApplication].delegate;
+            appDelegate.workingListenPort = 0;
+        });
     }
 }
 

@@ -11,6 +11,8 @@
 @interface SWBAppDelegate : NSObject <NSApplicationDelegate>
 @property (assign) IBOutlet NSWindow *window;
 @property (nonatomic, strong) NSStatusItem* item;
-- (NSInteger) toggleSystemProxyExternal;
+@property(nonatomic, assign) NSInteger workingListenPort;
+- (NSInteger) correctListenPort;
+- (void) modifySystemProxySettings:(BOOL)useProxy port:(NSInteger)port;
 - (void) updateMenu;
 @end

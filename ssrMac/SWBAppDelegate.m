@@ -46,6 +46,7 @@
     NSString *PACPath;
     NSString *userRulePath;
     AFHTTPSessionManager *manager;
+    GCDWebServer *_webServer;
 }
 
 static SWBAppDelegate *appDelegate;
@@ -58,17 +59,7 @@ static SWBAppDelegate *appDelegate;
 
     NSURL *url = [[NSBundle mainBundle] URLForResource:@"proxy" withExtension:@"pac.gz"];
     originalPACData = [[NSData dataWithContentsOfURL:url] gunzippedData];
-    GCDWebServer *webServer = [[GCDWebServer alloc] init];
-    [webServer addHandlerForMethod:@"GET"
-                              path:@"/proxy.pac"
-                      requestClass:[GCDWebServerRequest class]
-                      processBlock:^GCDWebServerResponse *(GCDWebServerRequest *request)
-     {
-         return [GCDWebServerDataResponse responseWithData:[self PACData] contentType:@"application/x-ns-proxy-autoconfig"];
-     }];
-
-    [webServer startWithPort:8090 bonjourName:@"webserver"];
-
+    
     manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 
@@ -117,12 +108,13 @@ static SWBAppDelegate *appDelegate;
     [menu addItemWithTitle:NSLocalizedString(@"Quit", nil) action:@selector(exit) keyEquivalent:@""];
     self.item.menu = menu;
 
-    [self initializeProxy];
-    [self updateMenu];
-
     configPath = [NSString stringWithFormat:@"%@/%@", NSHomeDirectory(), @".ssrMac"];
     PACPath = [NSString stringWithFormat:@"%@/%@", configPath, @"gfwlist.js"];
     userRulePath = [NSString stringWithFormat:@"%@/%@", configPath, @"user-rule.txt"];
+
+    [self initializeProxy];
+    [self updateMenu];
+
     [self monitorPAC:configPath];
     appDelegate = self;
     
@@ -130,6 +122,38 @@ static SWBAppDelegate *appDelegate;
     dispatch_async(proxy, ^{
         [self doRunProxyLoop];
     });
+}
+
+- (void) runWebServer:(NSInteger)port {
+    void(^runner)(void) = ^{
+        [self->_webServer stop];
+        [self->_webServer removeAllHandlers];
+        self->_webServer = nil;
+        
+        if (port == 0) {
+            return;
+        }
+        
+        self->_webServer = [[GCDWebServer alloc] init];
+        __weak typeof(self) weakSelf = self;
+        [self->_webServer addHandlerForMethod:@"GET"
+                                         path:@"/proxy.pac"
+                                 requestClass:[GCDWebServerRequest class]
+                                 processBlock:^GCDWebServerResponse *(GCDWebServerRequest *request)
+         {
+            return [GCDWebServerDataResponse responseWithData:[weakSelf PACData] contentType:@"application/x-ns-proxy-autoconfig"];
+        }];
+        
+        [self->_webServer startWithPort:8090 bonjourName:@"webserver"];
+    };
+    
+    if ([NSThread isMainThread]) {
+        runner();
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            runner();
+        });
+    }
 }
 
 - (BOOL) useProxy {
@@ -150,6 +174,12 @@ static SWBAppDelegate *appDelegate;
         return [NSData dataWithContentsOfFile:PACPath];
     } else {
         return originalPACData;
+    }
+}
+
+- (void) ensurePACData {
+    if (![[NSFileManager defaultManager] fileExistsAtPath:PACPath]) {
+        [originalPACData writeToFile:PACPath options:NSDataWritingAtomic error:nil];
     }
 }
 
@@ -430,7 +460,6 @@ void onPACChange(
     if (self.useProxy) {
         [self modifySystemProxySettings:YES port:self.workingListenPort];
     }
-    [self updateMenu];
 }
 
 - (void) toggleRunning {
@@ -482,7 +511,27 @@ void onPACChange(
     return port;
 }
 
+- (void) modifyPACData:(NSInteger)port {
+    NSData *data = [self PACData];
+    NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
+    NSString *pat = @"var proxy = \"SOCKS5 127.0.0.1:\\d+; SOCKS 127.0.0.1:\\d+; DIRECT;\";";
+    NSString *fmt = @"var proxy = \"SOCKS5 127.0.0.1:%d; SOCKS 127.0.0.1:%d; DIRECT;\";";
+    NSString *templ = [NSString stringWithFormat:fmt, port, port];
+    
+    NSError *error = nil;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pat options:NSRegularExpressionCaseInsensitive error:&error];
+    NSString *modifiedString = [regex stringByReplacingMatchesInString:string options:0 range:NSMakeRange(0, [string length]) withTemplate:templ];
+    [modifiedString writeToFile:PACPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+}
+
 - (void) modifySystemProxySettings:(BOOL)useProxy port:(NSInteger)port {
+    [self ensurePACData];
+    if (port > 0) {
+        [self modifyPACData:port];
+    }
+    [self runWebServer:port];
+    
     NSTask *task = [[NSTask alloc] init];
     [task setLaunchPath:kShadowsocksHelper];
 

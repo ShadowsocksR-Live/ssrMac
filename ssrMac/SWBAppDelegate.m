@@ -9,6 +9,7 @@
 #import <GZIP/GZIP.h>
 #import "SWBConfigWindowController.h"
 #import "SWBQRCodeWindowController.h"
+#import "SettingsController.h"
 #import "SWBAppDelegate.h"
 #import <GCDWebServers/GCDWebServer.h>
 #import <GCDWebServers/GCDWebServerDataResponse.h>
@@ -28,12 +29,12 @@
 @interface SWBAppDelegate () <SWBConfigWindowControllerDelegate>
 @property(nonatomic, assign) BOOL useProxy;
 @property(nonatomic, strong) NSString *runningMode;
-@property(nonatomic, assign) NSInteger listenPort;
 @end
 
 @implementation SWBAppDelegate {
     SWBConfigWindowController *configWindowController;
     SWBQRCodeWindowController *qrCodeWindowController;
+    SettingsController *settingsController;
     NSMenuItem *statusMenuItem;
     NSMenuItem *enableMenuItem;
     NSMenuItem *autoMenuItem;
@@ -101,6 +102,8 @@ static SWBAppDelegate *appDelegate;
     [menu addItem:[NSMenuItem separatorItem]];
     [menu addItem:[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Import URL from clipboard...", nil) action:@selector(importUrlFromClipboard) keyEquivalent:@""]];
     [menu addItem:[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Scan QR Code from Screen...", nil) action:@selector(scanQRCode) keyEquivalent:@""]];
+    [menu addItem:[NSMenuItem separatorItem]];
+    [menu addItemWithTitle:NSLocalizedString(@"Settings", nil) action:@selector(showSettingsWindow) keyEquivalent:@""];
     [menu addItem:[NSMenuItem separatorItem]];
     [menu addItemWithTitle:NSLocalizedString(@"Show Logs...", nil) action:@selector(showLogs) keyEquivalent:@""];
     [menu addItemWithTitle:NSLocalizedString(@"Help", nil) action:@selector(showHelp) keyEquivalent:@""];
@@ -383,6 +386,17 @@ void onPACChange(
     [configWindowController showWindow:self];
     [NSApp activateIgnoringOtherApps:YES];
     [configWindowController.window makeKeyAndOrderFront:nil];
+}
+
+- (void) showSettingsWindow {
+    if (settingsController) {
+        [settingsController close];
+    }
+    settingsController = [[SettingsController alloc] initWithWindowNibName:@"SettingsController"];
+    settingsController.appDelegate = self;
+    [settingsController showWindow:self];
+    [NSApp activateIgnoringOtherApps:YES];
+    [settingsController.window makeKeyAndOrderFront:nil];
 }
 
 - (void) applicationWillTerminate:(NSNotification *)notification {

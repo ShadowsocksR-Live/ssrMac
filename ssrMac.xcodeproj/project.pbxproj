@@ -57,6 +57,8 @@
 		62E2E1991A5AB21E00C9A2E1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62E2E1981A5AB21E00C9A2E1 /* SystemConfiguration.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		62E2E19B1A5AB23700C9A2E1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62E2E19A1A5AB23700C9A2E1 /* Security.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		62E2E19D1A5ABE5C00C9A2E1 /* abp.js in Resources */ = {isa = PBXBuildFile; fileRef = 62E2E19C1A5ABE5C00C9A2E1 /* abp.js */; };
+		B6CFA20F28A2BF0900F2C377 /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6CFA20D28A2BF0900F2C377 /* SettingsController.m */; };
+		B6CFA21028A2BF0900F2C377 /* SettingsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6CFA20E28A2BF0900F2C377 /* SettingsController.xib */; };
 		EB1897A04CF0382A754FE700 /* SWBConfigWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB1895348E32ABA4F4F86742 /* SWBConfigWindowController.m */; };
 		EB1899E6974F61B38B2FFD2C /* ProfileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EB1892B5027A6B1F1E2CDC12 /* ProfileManager.m */; };
 		EB189FE30A2E13F4D10D59ED /* SWBApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = EB189ABF1BF9729F1E0E8F72 /* SWBApplication.m */; };
@@ -334,6 +336,9 @@
 		62E2E19A1A5AB23700C9A2E1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		62E2E19C1A5ABE5C00C9A2E1 /* abp.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = abp.js; sourceTree = "<group>"; };
 		96D80C04176CE1D7006C8078 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		B6CFA20C28A2BF0900F2C377 /* SettingsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
+		B6CFA20D28A2BF0900F2C377 /* SettingsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
+		B6CFA20E28A2BF0900F2C377 /* SettingsController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsController.xib; sourceTree = "<group>"; };
 		EB189071407B3A2A9B4C83CB /* ProfileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileManager.h; sourceTree = "<group>"; };
 		EB1891B68FCBD841C5E461B6 /* About.md */ = {isa = PBXFileReference; lastKnownFileType = file.md; path = About.md; sourceTree = SOURCE_ROOT; };
 		EB1891FD08E70E9E9DC84AFD /* about.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = about.txt; sourceTree = "<group>"; };
@@ -542,6 +547,8 @@
 				3AD601372018D47700403182 /* GCDWebServer.xcodeproj */,
 				627A6E0A18B47E9300493BBC /* SWBAppDelegate.h */,
 				627A6E0B18B47E9300493BBC /* SWBAppDelegate.m */,
+				B6CFA20C28A2BF0900F2C377 /* SettingsController.h */,
+				B6CFA20D28A2BF0900F2C377 /* SettingsController.m */,
 				627A6E1018B47E9300493BBC /* Images.xcassets */,
 				627A6DFF18B47E9300493BBC /* Supporting Files */,
 				EB1895348E32ABA4F4F86742 /* SWBConfigWindowController.m */,
@@ -580,6 +587,7 @@
 				6232046F18C0719D001A30B9 /* menu_icon_disabled.png */,
 				629AC93218B49341001D2771 /* Application.xib */,
 				3A4AAEB3201B2FB7002F23AF /* ConfigWindow.xib */,
+				B6CFA20E28A2BF0900F2C377 /* SettingsController.xib */,
 				627A6E0018B47E9300493BBC /* ssrMac-Info.plist */,
 				627A6E0118B47E9300493BBC /* InfoPlist.strings */,
 				627A6E0418B47E9300493BBC /* main.m */,
@@ -831,6 +839,7 @@
 				62E27E6418C1F1E30086033D /* LICENSE in Resources */,
 				6232047718C08C6C001A30B9 /* Localizable.strings in Resources */,
 				625E5BBA19EA350F007A5124 /* QRCodeWindow.xib in Resources */,
+				B6CFA21028A2BF0900F2C377 /* SettingsController.xib in Resources */,
 				629AC93318B49341001D2771 /* Application.xib in Resources */,
 				3A4AAEB4201B2FB7002F23AF /* ConfigWindow.xib in Resources */,
 				620530BE18D44FB600887D3E /* install_helper.sh in Resources */,
@@ -872,6 +881,7 @@
 				3ABFEC872534AC8100A12D18 /* net_port_is_free.c in Sources */,
 				625E5BBD19EA36D2007A5124 /* SWBQRCodeWindowController.m in Sources */,
 				3ACA8CCB2019C17800839E41 /* ShadowsocksRunner.m in Sources */,
+				B6CFA20F28A2BF0900F2C377 /* SettingsController.m in Sources */,
 				EB189FE30A2E13F4D10D59ED /* SWBApplication.m in Sources */,
 				3A40B2D12019E0BC00F33F80 /* qrCodeOnScreen.m in Sources */,
 				EB1899E6974F61B38B2FFD2C /* ProfileManager.m in Sources */,
